@@ -1,5 +1,5 @@
 function __starship_soc_command_tokens
-    set -l buffer (commandline --current-buffer --cut-at-cursor)
+    set -l buffer (commandline --current-buffer --cut-at-cursor | string collect)
     set -l segments (string replace --all --regex '&&|\|\||[|;&]|\n|\band\b|\bor\b' \n -- "$buffer")
 
     for segment in $segments
