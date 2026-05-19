@@ -1,6 +1,7 @@
 # starship-show-on-command.fish
 
 Show selected Starship custom modules only while typing matching commands in fish.
+It brings a Powerlevel10k-style [`SHOW_ON_COMMAND`](https://github.com/romkatv/powerlevel10k#show-on-command) workflow to Starship.
 
 ## Install
 
