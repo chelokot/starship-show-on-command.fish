@@ -12,10 +12,18 @@ function __starship_soc_install
         touch "$config_path"
     end
 
+    set_color --bold
     echo "Starship config: $config_path"
+    set_color normal
     echo "This will set up Starship to show AWS/Kubernetes/GCloud/Python/system context only while matching commands are being typed."
     echo "It can also hide Starship's always-on versions of those modules, so the prompt does not show the same context twice."
+    set_color yellow
+    echo "It edits this config file: adds a managed block, updates top-level format, and may set aws/kubernetes/gcloud/python disabled = true."
+    echo "A timestamped backup is created before any change."
+    set_color normal
+    set_color --dim
     echo "Manual setup: run `starship-soc snippet` and edit your Starship config yourself."
+    set_color normal
 
     if test -z "$assume_yes"
         __starship_soc_confirm "Continue?"
