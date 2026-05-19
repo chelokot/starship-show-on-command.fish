@@ -11,7 +11,7 @@ function __starship_soc_kube_context
 
     set -l readable_files
     for file in $kubeconfig_files
-        if test -r "$file"
+        if test -f "$file"; and test -r "$file"
             set -a readable_files "$file"
         end
     end
