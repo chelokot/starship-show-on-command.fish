@@ -5,5 +5,42 @@ shell = ["sh"]
 style = "bold yellow"
 format = "on [$output]($style) "
 
+[custom.kube_on_command]
+when = "test \"$STARSHIP_SOC_KUBE\" = 1"
+command = "printf '%s' \"$STARSHIP_SOC_KUBE_CONTEXT\""
+shell = ["sh"]
+style = "bold blue"
+format = "on [$output]($style) "
+
+[custom.gcloud_on_command]
+when = "test \"$STARSHIP_SOC_GCLOUD\" = 1"
+command = "printf '%s' \"$STARSHIP_SOC_GCLOUD_CONTEXT\""
+shell = ["sh"]
+style = "bold blue"
+format = "on [$output]($style) "
+
+[custom.python_on_command]
+when = "test \"$STARSHIP_SOC_PYTHON\" = 1"
+command = "printf '%s' \"$STARSHIP_SOC_PYTHON_CONTEXT\""
+shell = ["sh"]
+style = "bold green"
+format = "via [$output]($style) "
+
+[custom.memory_on_command]
+when = "test \"$STARSHIP_SOC_MEMORY\" = 1"
+command = "printf '%s' '󰍛 memory'"
+shell = ["sh"]
+style = "bold purple"
+format = "via [$output]($style) "
+
 [aws]
+disabled = true
+
+[kubernetes]
+disabled = true
+
+[gcloud]
+disabled = true
+
+[python]
 disabled = true

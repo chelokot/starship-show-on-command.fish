@@ -1,6 +1,18 @@
 set -q starship_soc_aws_commands
 or set -g starship_soc_aws_commands aws awless cdk terraform terragrunt pulumi serverless sam
 
+set -q starship_soc_kube_commands
+or set -g starship_soc_kube_commands kubectl helm kubens kubectx oc istioctl k9s helmfile flux fluxctl stern
+
+set -q starship_soc_gcloud_commands
+or set -g starship_soc_gcloud_commands gcloud gsutil bq
+
+set -q starship_soc_python_commands
+or set -g starship_soc_python_commands python python3 pip pip3 pipx uv poetry pdm conda mamba pytest tox ipython jupyter
+
+set -q starship_soc_memory_commands
+or set -g starship_soc_memory_commands top htop btop free vmstat
+
 function __starship_soc_bind_mode
     set -l mode $argv[1]
 
@@ -21,6 +33,13 @@ function __starship_soc_clear --on-event fish_preexec --on-event fish_cancel
     set -e STARSHIP_SOC_ACTIVE
     set -e STARSHIP_SOC_AWS
     set -e STARSHIP_SOC_AWS_CONTEXT
+    set -e STARSHIP_SOC_KUBE
+    set -e STARSHIP_SOC_KUBE_CONTEXT
+    set -e STARSHIP_SOC_GCLOUD
+    set -e STARSHIP_SOC_GCLOUD_CONTEXT
+    set -e STARSHIP_SOC_PYTHON
+    set -e STARSHIP_SOC_PYTHON_CONTEXT
+    set -e STARSHIP_SOC_MEMORY
 end
 
 function __starship_soc_uninstall --on-event starship_show_on_command_uninstall --on-event starship_show_on_command_fish_uninstall
