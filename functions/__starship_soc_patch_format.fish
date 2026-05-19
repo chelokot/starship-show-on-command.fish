@@ -14,7 +14,9 @@ function __starship_soc_patch_format
         !in_section && /^format[[:space:]]*=/ {
             saw_format = 1
             if (index($0, "${custom.aws_on_command}") == 0) {
-                if (index($0, "$character") > 0) {
+                if (index($0, "$line_break") > 0) {
+                    sub(/\$line_break/, modules "$line_break")
+                } else if (index($0, "$character") > 0) {
                     sub(/\$character/, modules "$character")
                 } else {
                     sub(/"$/, modules "\"")
