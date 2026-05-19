@@ -13,8 +13,9 @@ function __starship_soc_install
     end
 
     echo "Starship config: $config_path"
-    echo "This can add managed custom modules, insert them into top-level format, and disable native duplicates."
-    echo "Manual alternative: run `starship-soc snippet` and edit your Starship config yourself."
+    echo "This will set up Starship to show AWS/Kubernetes/GCloud/Python/system context only while matching commands are being typed."
+    echo "It can also hide Starship's always-on versions of those modules, so the prompt does not show the same context twice."
+    echo "Manual setup: run `starship-soc snippet` and edit your Starship config yourself."
 
     if test -z "$assume_yes"
         __starship_soc_confirm "Continue?"
@@ -25,7 +26,7 @@ function __starship_soc_install
     cp "$config_path" "$backup_path"
     echo "Backup: $backup_path"
 
-    if test -n "$assume_yes"; or __starship_soc_confirm "Add/update managed custom module definitions?"
+    if test -n "$assume_yes"; or __starship_soc_confirm "Add/update Starship custom module definitions?" yes
         set -l tmp (mktemp)
         awk '
             BEGIN {
@@ -52,11 +53,11 @@ function __starship_soc_install
         __starship_soc_snippet --custom-only >>"$config_path"
     end
 
-    if test -n "$assume_yes"; or __starship_soc_confirm "Insert show-on-command modules into top-level format?"
+    if test -n "$assume_yes"; or __starship_soc_confirm "Show these modules in your prompt format?" yes
         __starship_soc_patch_format "$config_path"
     end
 
-    if test -n "$assume_yes"; or __starship_soc_confirm "Disable native aws/kubernetes/gcloud/python modules to avoid duplicates?"
+    if test -n "$assume_yes"; or __starship_soc_confirm "Hide always-on aws/kubernetes/gcloud/python modules?" yes
         for module in aws kubernetes gcloud python
             __starship_soc_disable_native_module "$config_path" "$module"
         end

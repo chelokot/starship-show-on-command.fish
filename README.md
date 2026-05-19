@@ -11,7 +11,7 @@ exec fish
 ```
 
 `starship-soc install` updates `$STARSHIP_CONFIG` or `~/.config/starship.toml`.
-It is interactive: it shows the config path, creates a backup, and asks before adding custom modules, changing top-level `format`, or disabling duplicate native modules.
+It is interactive: it shows the config path, creates a backup, and asks before adding custom modules, changing top-level `format`, or hiding always-on Starship modules that would show the same context twice.
 
 For non-interactive setup:
 
