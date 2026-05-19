@@ -37,11 +37,11 @@ starship-soc snippet
 ~/work/project on ☁️  default (us-east-1)
 ❯ aws
 
-~/work/project on ☁️  default (us-east-1) via  python 3.13.0 (.venv)
-❯ aws && python
-
 ~/work/project on ☸ staging/default
 ❯ kubectl
+
+~/work/project on ☁️  default (us-east-1) on ☸ staging/default
+❯ aws && kubectl
 
 ~/work/project on ☁️  user@example.com@my-project
 ❯ gcloud
