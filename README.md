@@ -27,6 +27,17 @@ To configure manually:
 starship-soc snippet
 ```
 
+## Demo
+
+```text
+~/work/project ❯ a
+~/work/project on ☁️  default (us-east-1) ❯ aws
+~/work/project on ☸ staging/default ❯ kubectl
+~/work/project on ☁️  user@example.com@my-project ❯ gcloud
+~/work/project via  python 3.13.0 (.venv) ❯ pytest
+~/work/project via 󰍛 memory ❯ htop
+```
+
 ## Defaults
 
 ```fish
@@ -53,7 +64,7 @@ starship-soc uninstall
 ## Notes
 
 - fish only
-- no Starship fork
+- reevaluates needed contexts on each keystroke
 - no daemon
 - state clears on command execution or cancel
 - repaint runs only when active state changes
