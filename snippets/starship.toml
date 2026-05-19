@@ -1,0 +1,9 @@
+[custom.aws_on_command]
+when = "test \"$STARSHIP_SOC_AWS\" = 1"
+command = "printf '%s' \"$STARSHIP_SOC_AWS_CONTEXT\""
+shell = ["sh"]
+style = "bold yellow"
+format = "on [$output]($style) "
+
+[aws]
+disabled = true
