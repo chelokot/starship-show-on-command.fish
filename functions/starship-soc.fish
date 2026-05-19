@@ -20,42 +20,13 @@ function starship-soc
             set -e STARSHIP_SOC_MEMORY
             commandline -f repaint 2>/dev/null
         case snippet
-            printf '%s\n' '[custom.aws_on_command]'
-            printf '%s\n' 'when = "test \"$STARSHIP_SOC_AWS\" = 1"'
-            printf '%s\n' 'command = "printf '\''%s'\'' \"$STARSHIP_SOC_AWS_CONTEXT\""'
-            printf '%s\n' 'shell = ["sh"]'
-            printf '%s\n' 'style = "bold yellow"'
-            printf '%s\n' 'format = "on [$output]($style) "'
-            printf '\n'
-            printf '%s\n' '[custom.kube_on_command]'
-            printf '%s\n' 'when = "test \"$STARSHIP_SOC_KUBE\" = 1"'
-            printf '%s\n' 'command = "printf '\''%s'\'' \"$STARSHIP_SOC_KUBE_CONTEXT\""'
-            printf '%s\n' 'shell = ["sh"]'
-            printf '%s\n' 'style = "bold blue"'
-            printf '%s\n' 'format = "on [$output]($style) "'
-            printf '\n'
-            printf '%s\n' '[custom.gcloud_on_command]'
-            printf '%s\n' 'when = "test \"$STARSHIP_SOC_GCLOUD\" = 1"'
-            printf '%s\n' 'command = "printf '\''%s'\'' \"$STARSHIP_SOC_GCLOUD_CONTEXT\""'
-            printf '%s\n' 'shell = ["sh"]'
-            printf '%s\n' 'style = "bold blue"'
-            printf '%s\n' 'format = "on [$output]($style) "'
-            printf '\n'
-            printf '%s\n' '[custom.python_on_command]'
-            printf '%s\n' 'when = "test \"$STARSHIP_SOC_PYTHON\" = 1"'
-            printf '%s\n' 'command = "printf '\''%s'\'' \"$STARSHIP_SOC_PYTHON_CONTEXT\""'
-            printf '%s\n' 'shell = ["sh"]'
-            printf '%s\n' 'style = "bold green"'
-            printf '%s\n' 'format = "via [$output]($style) "'
-            printf '\n'
-            printf '%s\n' '[custom.memory_on_command]'
-            printf '%s\n' 'when = "test \"$STARSHIP_SOC_MEMORY\" = 1"'
-            printf '%s\n' 'command = "printf '\''%s'\'' '\''󰍛 memory'\''"'
-            printf '%s\n' 'shell = ["sh"]'
-            printf '%s\n' 'style = "bold purple"'
-            printf '%s\n' 'format = "via [$output]($style) "'
+            __starship_soc_snippet
+        case install
+            __starship_soc_install
+        case uninstall
+            __starship_soc_uninstall_config
         case '*'
-            echo "usage: starship-soc status|clear|snippet" >&2
+            echo "usage: starship-soc status|clear|snippet|install|uninstall" >&2
             return 2
     end
 end

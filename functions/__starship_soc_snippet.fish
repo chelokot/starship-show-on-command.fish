@@ -1,0 +1,58 @@
+function __starship_soc_snippet
+    set -l custom_only
+    test "$argv[1]" = --custom-only
+    and set custom_only 1
+
+    printf '%s\n' '# >>> starship-show-on-command.fish >>>'
+    printf '%s\n' '[custom.aws_on_command]'
+    printf '%s\n' 'when = "test \"$STARSHIP_SOC_AWS\" = 1"'
+    printf '%s\n' 'command = "printf '\''%s'\'' \"$STARSHIP_SOC_AWS_CONTEXT\""'
+    printf '%s\n' 'shell = ["sh"]'
+    printf '%s\n' 'style = "bold yellow"'
+    printf '%s\n' 'format = "on [$output]($style) "'
+    printf '\n'
+    printf '%s\n' '[custom.kube_on_command]'
+    printf '%s\n' 'when = "test \"$STARSHIP_SOC_KUBE\" = 1"'
+    printf '%s\n' 'command = "printf '\''%s'\'' \"$STARSHIP_SOC_KUBE_CONTEXT\""'
+    printf '%s\n' 'shell = ["sh"]'
+    printf '%s\n' 'style = "bold blue"'
+    printf '%s\n' 'format = "on [$output]($style) "'
+    printf '\n'
+    printf '%s\n' '[custom.gcloud_on_command]'
+    printf '%s\n' 'when = "test \"$STARSHIP_SOC_GCLOUD\" = 1"'
+    printf '%s\n' 'command = "printf '\''%s'\'' \"$STARSHIP_SOC_GCLOUD_CONTEXT\""'
+    printf '%s\n' 'shell = ["sh"]'
+    printf '%s\n' 'style = "bold blue"'
+    printf '%s\n' 'format = "on [$output]($style) "'
+    printf '\n'
+    printf '%s\n' '[custom.python_on_command]'
+    printf '%s\n' 'when = "test \"$STARSHIP_SOC_PYTHON\" = 1"'
+    printf '%s\n' 'command = "printf '\''%s'\'' \"$STARSHIP_SOC_PYTHON_CONTEXT\""'
+    printf '%s\n' 'shell = ["sh"]'
+    printf '%s\n' 'style = "bold green"'
+    printf '%s\n' 'format = "via [$output]($style) "'
+    printf '\n'
+    printf '%s\n' '[custom.memory_on_command]'
+    printf '%s\n' 'when = "test \"$STARSHIP_SOC_MEMORY\" = 1"'
+    printf '%s\n' 'command = "printf '\''%s'\'' '\''󰍛 memory'\''"'
+    printf '%s\n' 'shell = ["sh"]'
+    printf '%s\n' 'style = "bold purple"'
+    printf '%s\n' 'format = "via [$output]($style) "'
+
+    if test -z "$custom_only"
+        printf '\n'
+        printf '%s\n' '[aws]'
+        printf '%s\n' 'disabled = true'
+        printf '\n'
+        printf '%s\n' '[kubernetes]'
+        printf '%s\n' 'disabled = true'
+        printf '\n'
+        printf '%s\n' '[gcloud]'
+        printf '%s\n' 'disabled = true'
+        printf '\n'
+        printf '%s\n' '[python]'
+        printf '%s\n' 'disabled = true'
+    end
+
+    printf '%s\n' '# <<< starship-show-on-command.fish <<<'
+end

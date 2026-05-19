@@ -6,31 +6,12 @@ Show selected Starship custom modules only while typing matching commands in fis
 
 ```fish
 fisher install chelokot/starship-show-on-command.fish
+starship-soc install
+exec fish
 ```
 
-## Starship
-
-Add the modules you want to `format` and copy the matching sections from `snippets/starship.toml`.
-
-```toml
-format = "$directory${custom.aws_on_command}${custom.kube_on_command}${custom.gcloud_on_command}${custom.python_on_command}${custom.memory_on_command}$character"
-```
-
-Disable native modules that would duplicate the custom ones:
-
-```toml
-[aws]
-disabled = true
-
-[kubernetes]
-disabled = true
-
-[gcloud]
-disabled = true
-
-[python]
-disabled = true
-```
+`starship-soc install` updates `$STARSHIP_CONFIG` or `~/.config/starship.toml`.
+It adds a managed custom-module block, inserts the modules into top-level `format`, and disables duplicate native modules.
 
 ## Defaults
 
@@ -50,6 +31,8 @@ Override any list before the plugin loads, or in `config.fish` followed by a new
 starship-soc status
 starship-soc clear
 starship-soc snippet
+starship-soc install
+starship-soc uninstall
 ```
 
 ## Notes
