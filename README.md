@@ -98,7 +98,9 @@ starship-soc uninstall
 ## Notes
 
 - fish only
-- reevaluates needed contexts on each keystroke
+- reevaluates the current command segment on each keystroke
+- matches only the command token; arguments are not inspected
+- starts matching again after fish process separators like `|`, `&&`, `||`, `;`, `&`, and newlines
 - no daemon
 - state clears on command execution or cancel
 - repaint runs only when active state changes

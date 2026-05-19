@@ -1,13 +1,5 @@
 function __starship_soc_update
-    set -l command_tokens (commandline -opc)
-    set -l command_token
-
-    if test (count $command_tokens) -gt 0
-        set command_token $command_tokens[1]
-    else
-        set command_token (commandline -t)
-    end
-
+    set -l command_token (__starship_soc_command_token)
     set -l next_active
 
     for context in $starship_soc_contexts
