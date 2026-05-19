@@ -11,7 +11,19 @@ exec fish
 ```
 
 `starship-soc install` updates `$STARSHIP_CONFIG` or `~/.config/starship.toml`.
-It adds a managed custom-module block, inserts the modules into top-level `format`, and disables duplicate native modules.
+It is interactive: it shows the config path, creates a backup, and asks before adding custom modules, changing top-level `format`, or disabling duplicate native modules.
+
+For non-interactive setup:
+
+```fish
+starship-soc install --yes
+```
+
+To configure manually:
+
+```fish
+starship-soc snippet
+```
 
 ## Defaults
 
@@ -32,6 +44,7 @@ starship-soc status
 starship-soc clear
 starship-soc snippet
 starship-soc install
+starship-soc install --yes
 starship-soc uninstall
 ```
 

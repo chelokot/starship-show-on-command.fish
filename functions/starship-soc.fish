@@ -22,11 +22,11 @@ function starship-soc
         case snippet
             __starship_soc_snippet
         case install
-            __starship_soc_install
+            __starship_soc_install $argv[2..-1]
         case uninstall
             __starship_soc_uninstall_config
         case '*'
-            echo "usage: starship-soc status|clear|snippet|install|uninstall" >&2
+            echo "usage: starship-soc status|clear|snippet|install [--yes]|uninstall" >&2
             return 2
     end
 end
