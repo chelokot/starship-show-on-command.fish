@@ -37,6 +37,9 @@ starship-soc snippet
 ~/work/project on ☁️  default (us-east-1)
 ❯ aws
 
+~/work/project on ☁️  default (us-east-1) via  python 3.13.0 (.venv)
+❯ aws && python
+
 ~/work/project on ☸ staging/default
 ❯ kubectl
 
@@ -98,9 +101,10 @@ starship-soc uninstall
 ## Notes
 
 - fish only
-- reevaluates the current command segment on each keystroke
-- matches only the command token; arguments are not inspected
-- starts matching again after fish process separators like `|`, `&&`, `||`, `;`, `&`, and newlines
+- reevaluates command segments up to the cursor on each keystroke
+- for each segment, reads only up to the first whitespace; arguments are not inspected
+- starts matching again after fish process separators like `|`, `&&`, `||`, `;`, `&`, newlines, `and`, and `or`
+- can show multiple contexts at once, for example `aws && python`
 - no daemon
 - state clears on command execution or cancel
 - repaint runs only when active state changes
