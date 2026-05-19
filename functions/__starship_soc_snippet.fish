@@ -4,40 +4,26 @@ function __starship_soc_snippet
     and set custom_only 1
 
     printf '%s\n' '# >>> starship-show-on-command.fish >>>'
-    printf '%s\n' '[custom.aws_on_command]'
-    printf '%s\n' 'when = "test \"$STARSHIP_SOC_AWS\" = 1"'
-    printf '%s\n' 'command = "printf '\''%s'\'' \"$STARSHIP_SOC_AWS_CONTEXT\""'
-    printf '%s\n' 'shell = ["sh"]'
-    printf '%s\n' 'style = "bold yellow"'
-    printf '%s\n' 'format = "on [$output]($style) "'
-    printf '\n'
-    printf '%s\n' '[custom.kube_on_command]'
-    printf '%s\n' 'when = "test \"$STARSHIP_SOC_KUBE\" = 1"'
-    printf '%s\n' 'command = "printf '\''%s'\'' \"$STARSHIP_SOC_KUBE_CONTEXT\""'
-    printf '%s\n' 'shell = ["sh"]'
-    printf '%s\n' 'style = "bold blue"'
-    printf '%s\n' 'format = "on [$output]($style) "'
-    printf '\n'
-    printf '%s\n' '[custom.gcloud_on_command]'
-    printf '%s\n' 'when = "test \"$STARSHIP_SOC_GCLOUD\" = 1"'
-    printf '%s\n' 'command = "printf '\''%s'\'' \"$STARSHIP_SOC_GCLOUD_CONTEXT\""'
-    printf '%s\n' 'shell = ["sh"]'
-    printf '%s\n' 'style = "bold blue"'
-    printf '%s\n' 'format = "on [$output]($style) "'
-    printf '\n'
-    printf '%s\n' '[custom.python_on_command]'
-    printf '%s\n' 'when = "test \"$STARSHIP_SOC_PYTHON\" = 1"'
-    printf '%s\n' 'command = "printf '\''%s'\'' \"$STARSHIP_SOC_PYTHON_CONTEXT\""'
-    printf '%s\n' 'shell = ["sh"]'
-    printf '%s\n' 'style = "bold green"'
-    printf '%s\n' 'format = "via [$output]($style) "'
-    printf '\n'
-    printf '%s\n' '[custom.memory_on_command]'
-    printf '%s\n' 'when = "test \"$STARSHIP_SOC_MEMORY\" = 1"'
-    printf '%s\n' 'command = "printf '\''%s'\'' '\''󰍛 memory'\''"'
-    printf '%s\n' 'shell = ["sh"]'
-    printf '%s\n' 'style = "bold purple"'
-    printf '%s\n' 'format = "via [$output]($style) "'
+    for context in $starship_soc_contexts
+        set -l upper (string upper -- $context)
+        set -l style_variable starship_soc_"$context"_style
+        set -l format_variable starship_soc_"$context"_format
+        set -l style $$style_variable
+        set -l format $$format_variable
+
+        test -n "$style"
+        or set style "bold cyan"
+        test -n "$format"
+        or set format 'on [$output]($style) '
+
+        printf '%s\n' "[custom.$context"_on_command"]"
+        printf 'when = "test \\\\"$STARSHIP_SOC_%s\\\\" = 1"\n' $upper
+        printf 'command = "printf '\''%%s'\'' \\\\"$STARSHIP_SOC_%s_CONTEXT\\\\""\n' $upper
+        printf '%s\n' 'shell = ["sh"]'
+        printf 'style = "%s"\n' $style
+        printf 'format = "%s"\n' $format
+        printf '\n'
+    end
 
     if test -z "$custom_only"
         printf '\n'

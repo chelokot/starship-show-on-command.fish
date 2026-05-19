@@ -53,6 +53,8 @@ starship-soc snippet
 ## Defaults
 
 ```fish
+set -g starship_soc_contexts aws kube gcloud python memory
+
 set -g starship_soc_aws_commands aws awless cdk terraform terragrunt pulumi serverless sam
 set -g starship_soc_kube_commands kubectl helm kubens kubectx oc istioctl k9s helmfile flux fluxctl stern
 set -g starship_soc_gcloud_commands gcloud gsutil bq
@@ -61,6 +63,26 @@ set -g starship_soc_memory_commands top htop btop free vmstat
 ```
 
 Override any list before the plugin loads, or in `config.fish` followed by a new shell.
+
+## Custom Context
+
+```fish
+set -a starship_soc_contexts customapp
+set -g starship_soc_customapp_commands deploy preview
+set -g starship_soc_customapp_label "custom app prod"
+set -g starship_soc_customapp_style "bold magenta"
+set -g starship_soc_customapp_format 'on [$output]($style) '
+```
+
+Typing `deploy` or `preview` will set `STARSHIP_SOC_CUSTOMAPP=1` and show the generated `custom.customapp_on_command` Starship module.
+
+For dynamic context text, define a function:
+
+```fish
+function __starship_soc_customapp_context
+    echo "custom app "(cat .environment)
+end
+```
 
 ## Commands
 

@@ -1,17 +1,42 @@
+set -q starship_soc_contexts
+or set -g starship_soc_contexts aws kube gcloud python memory
+
 set -q starship_soc_aws_commands
 or set -g starship_soc_aws_commands aws awless cdk terraform terragrunt pulumi serverless sam
+set -q starship_soc_aws_style
+or set -g starship_soc_aws_style "bold yellow"
+set -q starship_soc_aws_format
+or set -g starship_soc_aws_format 'on [$output]($style) '
 
 set -q starship_soc_kube_commands
 or set -g starship_soc_kube_commands kubectl helm kubens kubectx oc istioctl k9s helmfile flux fluxctl stern
+set -q starship_soc_kube_style
+or set -g starship_soc_kube_style "bold blue"
+set -q starship_soc_kube_format
+or set -g starship_soc_kube_format 'on [$output]($style) '
 
 set -q starship_soc_gcloud_commands
 or set -g starship_soc_gcloud_commands gcloud gsutil bq
+set -q starship_soc_gcloud_style
+or set -g starship_soc_gcloud_style "bold blue"
+set -q starship_soc_gcloud_format
+or set -g starship_soc_gcloud_format 'on [$output]($style) '
 
 set -q starship_soc_python_commands
 or set -g starship_soc_python_commands python python3 pip pip3 pipx uv poetry pdm conda mamba pytest tox ipython jupyter
+set -q starship_soc_python_style
+or set -g starship_soc_python_style "bold green"
+set -q starship_soc_python_format
+or set -g starship_soc_python_format 'via [$output]($style) '
 
 set -q starship_soc_memory_commands
 or set -g starship_soc_memory_commands top htop btop free vmstat
+set -q starship_soc_memory_label
+or set -g starship_soc_memory_label "󰍛 memory"
+set -q starship_soc_memory_style
+or set -g starship_soc_memory_style "bold purple"
+set -q starship_soc_memory_format
+or set -g starship_soc_memory_format 'via [$output]($style) '
 
 function __starship_soc_bind_mode
     set -l mode $argv[1]
@@ -30,16 +55,7 @@ if string match -q '*self-insert*' -- $default_empty_binding
 end
 
 function __starship_soc_clear --on-event fish_preexec --on-event fish_cancel
-    set -e STARSHIP_SOC_ACTIVE
-    set -e STARSHIP_SOC_AWS
-    set -e STARSHIP_SOC_AWS_CONTEXT
-    set -e STARSHIP_SOC_KUBE
-    set -e STARSHIP_SOC_KUBE_CONTEXT
-    set -e STARSHIP_SOC_GCLOUD
-    set -e STARSHIP_SOC_GCLOUD_CONTEXT
-    set -e STARSHIP_SOC_PYTHON
-    set -e STARSHIP_SOC_PYTHON_CONTEXT
-    set -e STARSHIP_SOC_MEMORY
+    __starship_soc_clear_state
 end
 
 function __starship_soc_uninstall --on-event starship_show_on_command_uninstall --on-event starship_show_on_command_fish_uninstall
