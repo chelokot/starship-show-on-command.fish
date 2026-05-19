@@ -34,35 +34,32 @@ starship-soc snippet
 ~/work/project
 ❯ a
 
-~/work/project on ☁️  default (us-east-1)
+~/work/project on ☁️ default (us-east-1)
 ❯ aws
 
 ~/work/project on ☸ staging/default
 ❯ kubectl
 
-~/work/project on ☁️  default (us-east-1) on ☸ staging/default
+~/work/project on ☁️ default (us-east-1) on ☸ staging/default
 ❯ aws && kubectl
 
-~/work/project on ☁️  user@example.com@my-project
+~/work/project on ☁️ user@example.com@my-project
 ❯ gcloud
 
 ~/work/project via  python 3.13.0 (.venv)
 ❯ pytest
 
-~/work/project via 󰍛 memory
-❯ htop
 ```
 
 ## Defaults
 
 ```fish
-set -g starship_soc_contexts aws kube gcloud python memory
+set -g starship_soc_contexts aws kube gcloud python
 
 set -g starship_soc_aws_commands aws awless cdk terraform terragrunt pulumi serverless sam
 set -g starship_soc_kube_commands kubectl helm kubens kubectx oc istioctl k9s helmfile flux fluxctl stern
 set -g starship_soc_gcloud_commands gcloud gsutil bq
 set -g starship_soc_python_commands python python3 pip pip3 pipx uv poetry pdm conda mamba pytest tox ipython jupyter
-set -g starship_soc_memory_commands top htop btop free vmstat
 ```
 
 Override any list before the plugin loads, or in `config.fish` followed by a new shell.

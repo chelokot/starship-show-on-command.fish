@@ -26,13 +26,6 @@ shell = ["sh"]
 style = "bold green"
 format = "via [$output]($style) "
 
-[custom.memory_on_command]
-when = "test \"$STARSHIP_SOC_MEMORY\" = 1"
-command = "printf '%s' '󰍛 memory'"
-shell = ["sh"]
-style = "bold purple"
-format = "via [$output]($style) "
-
 [aws]
 disabled = true
 

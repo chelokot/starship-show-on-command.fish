@@ -1,5 +1,5 @@
 set -q starship_soc_contexts
-or set -g starship_soc_contexts aws kube gcloud python memory
+or set -g starship_soc_contexts aws kube gcloud python
 
 set -q starship_soc_aws_commands
 or set -g starship_soc_aws_commands aws awless cdk terraform terragrunt pulumi serverless sam
@@ -28,15 +28,6 @@ set -q starship_soc_python_style
 or set -g starship_soc_python_style "bold green"
 set -q starship_soc_python_format
 or set -g starship_soc_python_format 'via [$output]($style) '
-
-set -q starship_soc_memory_commands
-or set -g starship_soc_memory_commands top htop btop free vmstat
-set -q starship_soc_memory_label
-or set -g starship_soc_memory_label "󰍛 memory"
-set -q starship_soc_memory_style
-or set -g starship_soc_memory_style "bold purple"
-set -q starship_soc_memory_format
-or set -g starship_soc_memory_format 'via [$output]($style) '
 
 function __starship_soc_bind_mode
     set -l mode $argv[1]
