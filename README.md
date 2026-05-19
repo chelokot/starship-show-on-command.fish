@@ -4,6 +4,8 @@ Show selected Starship custom modules only while typing matching commands in fis
 
 ## Install
 
+You can install using [Fisher](https://github.com/jorgebucaran/fisher):
+
 ```fish
 fisher install chelokot/starship-show-on-command.fish
 starship-soc install
