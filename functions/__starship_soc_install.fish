@@ -4,6 +4,9 @@ function __starship_soc_install
         set assume_yes 1
     end
 
+    __starship_soc_ensure_starship "$assume_yes"
+    or return $status
+
     set -l config_path (__starship_soc_config_path)
     set -l config_dir (dirname "$config_path")
     mkdir -p "$config_dir"
@@ -69,6 +72,20 @@ function __starship_soc_install
         for module in aws kubernetes gcloud python
             __starship_soc_disable_native_module "$config_path" "$module"
         end
+    end
+
+    set -l validation_output (env STARSHIP_CONFIG="$config_path" starship explain 2>&1 >/dev/null)
+    set -l validation_status $status
+    if test "$validation_status" -ne 0; or test (count $validation_output) -gt 0
+        cp "$backup_path" "$config_path"
+        echo "starship-soc generated an invalid Starship config; restored backup: $backup_path" >&2
+        if test (count $validation_output) -gt 0
+            printf '%s\n' $validation_output >&2
+        end
+        if test "$validation_status" -eq 0
+            return 1
+        end
+        return $validation_status
     end
 
     echo "updated $config_path"

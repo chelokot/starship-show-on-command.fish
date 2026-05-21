@@ -1,7 +1,8 @@
 # starship-show-on-command.fish
 
-Show Starship prompt context only when it is relevant to the command you are typing in fish.
-It brings a Powerlevel10k-style [`SHOW_ON_COMMAND`](https://github.com/romkatv/powerlevel10k#show-on-command) workflow to Starship.
+Show Starship prompt context only when it is relevant to the command you are typing in fish. It brings a Powerlevel10k-style [`SHOW_ON_COMMAND`](https://github.com/romkatv/powerlevel10k#show-on-command) workflow to Starship.
+
+Requires [Starship](https://starship.rs/) to be installed first.
 
 ## Install
 
