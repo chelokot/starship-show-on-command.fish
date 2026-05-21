@@ -24,12 +24,15 @@ function __starship_soc_patch_format
             }
         }
         {
-            print
+            lines[NR] = $0
         }
         END {
             if (!saw_format) {
                 print "format = \"$directory" modules "$character\""
                 print ""
+            }
+            for (i = 1; i <= NR; i++) {
+                print lines[i]
             }
         }
     ' "$config_path" >"$tmp"
