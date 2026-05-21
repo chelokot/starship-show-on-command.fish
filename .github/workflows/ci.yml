@@ -1,0 +1,61 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: fish 4 / starship 1.25.1
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    env:
+      STARSHIP_VERSION: 1.25.1
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Install fish
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes software-properties-common
+          sudo add-apt-repository --yes ppa:fish-shell/release-4
+          sudo apt-get update
+          sudo apt-get install --yes fish
+
+      - name: Install starship
+        run: |
+          curl --fail --location --silent --show-error \
+            "https://github.com/starship/starship/releases/download/v${STARSHIP_VERSION}/starship-x86_64-unknown-linux-gnu.tar.gz" \
+            --output starship.tar.gz
+          curl --fail --location --silent --show-error \
+            "https://github.com/starship/starship/releases/download/v${STARSHIP_VERSION}/starship-x86_64-unknown-linux-gnu.tar.gz.sha256" \
+            --output starship.tar.gz.sha256
+          printf '%s  starship.tar.gz\n' "$(cat starship.tar.gz.sha256)" > starship.tar.gz.sha256.check
+          sha256sum --check starship.tar.gz.sha256.check
+          tar -xzf starship.tar.gz
+          sudo install -m 0755 starship /usr/local/bin/starship
+
+      - name: Print tool versions
+        run: |
+          fish --version
+          starship --version
+
+      - name: Check fish syntax
+        run: fish --no-config --no-execute functions/*.fish conf.d/*.fish tests/*.fish
+
+      - name: Test fresh install
+        run: fish --no-config tests/fresh_install.fish
+
+      - name: Test missing Starship installer
+        run: fish --no-config tests/install_starship_when_missing.fish
+
+      - name: Test invalid config rollback
+        run: fish --no-config tests/invalid_config_rollback.fish
